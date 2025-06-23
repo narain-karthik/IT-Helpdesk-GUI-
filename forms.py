@@ -1,12 +1,13 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, TextAreaField, SelectField, SubmitField, EmailField
+from wtforms import StringField, PasswordField, TextAreaField, SelectField, SubmitField, EmailField, BooleanField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 from models import User
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=3, max=80)])
     password = PasswordField('Password', validators=[DataRequired()])
+    remember_me = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
 class TicketForm(FlaskForm):

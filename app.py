@@ -18,15 +18,15 @@ db = SQLAlchemy(model_class=Base)
 
 
 def get_database_uri():
-    """Get database URI - PostgreSQL primary, with SQL Server and MySQL support"""
+    """Get database URI - PostgreSQL primary, SQLite fallback for Replit"""
     
     # PostgreSQL (primary database)
     postgres_url = os.environ.get("DATABASE_URL")
     if postgres_url:
         return postgres_url
 
-    # Direct PostgreSQL configuration for local development
-    return "postgresql://helpdesk_user:helpdesk_password_2024@localhost:5432/it_helpdesk"
+    # SQLite fallback for Replit environment
+    return "sqlite:///it_helpdesk.db"
 
 
 # Create the app

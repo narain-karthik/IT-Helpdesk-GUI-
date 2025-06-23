@@ -78,7 +78,7 @@ class Ticket(db.Model):
     
     @property
     def ticket_number(self):
-        return f"GTN-{self.id:06d}"
+        return f"IT-{self.id:06d}"
     
     def __repr__(self):
         return f'<Ticket {self.ticket_number}: {self.title}>'

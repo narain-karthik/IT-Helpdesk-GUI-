@@ -1,66 +1,212 @@
 {% extends "base.html" %}
 
+{% block title %}Administrator Portal - IT Helpdesk Professional{% endblock %}
+
+{% block main_class %}admin-login-page-container{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item active" aria-current="page">
+        <i class="ri-shield-keyhole-line"></i> Administrator Login
+    </li>
+{% endblock %}
+
 {% block content %}
-    <div class="login-page">
-        <div class="container">
-            <div class="row justify-content-center align-items-center min-vh-100">
-                <div class="col-md-5">
-                    <div class="login-card admin-login">
-                        <div class="login-header">
-                            <img src="{{ url_for('static', filename='it_helpdesk_logo.png') }}" alt="IT Helpdesk" class="login-logo">
-                            <h4><i class="ri-shield-user-line"></i> Admin Login</h4>
-                            <p class="text-muted">IT Administrator Access</p>
+<div class="container-fluid">
+    <div class="row min-vh-100">
+        <!-- Centered Admin Login Card -->
+        <div class="col-12 d-flex align-items-center justify-content-center">
+            <div class="admin-login-card">
+                <div class="card shadow-lg border-0">
+                    <!-- Security Header -->
+                    <div class="card-header bg-danger text-white text-center py-4">
+                        <div class="mb-3">
+                            <i class="ri-shield-star-line" style="font-size: 3rem;"></i>
                         </div>
-                        
-                        <div class="login-form">
-                            <form method="POST">
-                                {{ form.hidden_tag() }}
-                                
-                                <div class="form-floating mb-3">
-                                    {{ form.username(class="form-control" + (" is-invalid" if form.username.errors else ""), 
-                                                    autocomplete="username", placeholder="Admin Username") }}
-                                    {{ form.username.label() }}
-                                    {% if form.username.errors %}
-                                        <div class="invalid-feedback">
-                                            {% for error in form.username.errors %}{{ error }}{% endfor %}
-                                        </div>
-                                    {% endif %}
+                        <h3 class="fw-bold mb-2">Administrator Portal</h3>
+                        <p class="mb-0 opacity-75">Secure Management Console</p>
+                    </div>
+
+                    <div class="card-body p-5">
+                        <!-- Security Warning -->
+                        <div class="alert alert-warning border-0 mb-4">
+                            <div class="d-flex align-items-center">
+                                <i class="ri-shield-check-line me-2"></i>
+                                <div>
+                                    <strong>Restricted Access:</strong> Authorized administrators only
                                 </div>
-                                
-                                <div class="form-floating mb-4">
-                                    {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""), 
-                                                    autocomplete="current-password", placeholder="Password") }}
-                                    {{ form.password.label() }}
-                                    {% if form.password.errors %}
-                                        <div class="invalid-feedback">
-                                            {% for error in form.password.errors %}{{ error }}{% endfor %}
-                                        </div>
-                                    {% endif %}
-                                </div>
-                                
-                                <div class="d-grid mb-3">
-                                    {{ form.submit(class="btn btn-danger btn-lg") }}
-                                </div>
-                            </form>
+                            </div>
                         </div>
-                        
-                        <div class="login-footer">
-                            <a href="{{ url_for('index') }}" class="text-muted">← Back to Home</a>
-                            <a href="{{ url_for('user_login') }}" class="text-muted">User Login</a>
+
+                        <!-- Admin Login Form -->
+                        <form method="POST" novalidate>
+                            {{ form.hidden_tag() }}
+                            
+                            <div class="mb-3">
+                                <label for="adminUsername" class="form-label fw-semibold text-danger">Administrator ID</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0">
+                                        <i class="ri-admin-line text-danger"></i>
+                                    </span>
+                                    {{ form.username(class="form-control border-start-0 ps-0", placeholder="Enter administrator username", id="adminUsername") }}
+                                </div>
+                                {% if form.username.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.username.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="adminPassword" class="form-label fw-semibold text-danger">Secure Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0">
+                                        <i class="ri-key-line text-danger"></i>
+                                    </span>
+                                    {{ form.password(class="form-control border-start-0 border-end-0 ps-0", placeholder="Enter secure password", id="adminPassword") }}
+                                    <button class="btn btn-outline-secondary border-start-0" type="button" id="toggleAdminPassword">
+                                        <i class="ri-eye-line"></i>
+                                    </button>
+                                </div>
+                                {% if form.password.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.password.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-4 d-flex justify-content-between align-items-center">
+                                <div class="form-check">
+                                    {{ form.remember_me(class="form-check-input", id="adminRememberMe") }}
+                                    {{ form.remember_me.label(class="form-check-label", for="adminRememberMe") }}
+                                </div>
+                                <small class="text-muted">
+                                    <i class="ri-time-line"></i> Session timeout: 30 minutes
+                                </small>
+                            </div>
+
+                            <div class="d-grid mb-3">
+                                {{ form.submit(class="btn btn-danger btn-lg fw-semibold") }}
+                            </div>
+                        </form>
+
+                        <!-- Security Features -->
+                        <div class="row text-center mb-3">
+                            <div class="col-3">
+                                <i class="ri-shield-check-line text-success d-block mb-1"></i>
+                                <small class="text-muted">Encrypted</small>
+                            </div>
+                            <div class="col-3">
+                                <i class="ri-time-line text-info d-block mb-1"></i>
+                                <small class="text-muted">Timed Session</small>
+                            </div>
+                            <div class="col-3">
+                                <i class="ri-history-line text-warning d-block mb-1"></i>
+                                <small class="text-muted">Audit Logged</small>
+                            </div>
+                            <div class="col-3">
+                                <i class="ri-lock-line text-primary d-block mb-1"></i>
+                                <small class="text-muted">2FA Ready</small>
+                            </div>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="text-center mb-3">
+                            <small class="text-muted">navigation</small>
+                        </div>
+
+                        <!-- Navigation Links -->
+                        <div class="d-grid gap-2 mb-3">
+                            <a href="{{ url_for('user_login') }}" class="btn btn-outline-primary">
+                                <i class="ri-user-line"></i> Employee Portal
+                            </a>
+                        </div>
+
+                        <!-- Back to Home -->
+                        <div class="text-center">
+                            <a href="{{ url_for('index') }}" class="text-decoration-none text-muted">
+                                <i class="ri-arrow-left-line"></i> Back to Home
+                            </a>
                         </div>
                     </div>
-                    
-                    <!-- Admin Access Notice -->
-                 <Br>   <div class="help-notice">
-                        <div class="alert alert-warning">
-                            <h6><i class="ri-shield-line"></i> Admin Access Only</h6>
-                            <p class="mb-0">This portal is restricted to authorized IT administrators. Contact your IT manager if you need admin access credentials.</p>
-                        </div>
+
+                    <!-- Card Footer -->
+                    <div class="card-footer bg-dark text-light text-center py-3">
+                        <small>
+                            <i class="ri-information-line"></i>
+                            All administrative activities are logged and monitored
+                        </small>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Password toggle functionality
+    const passwordToggle = document.getElementById('toggleAdminPassword');
+    const passwordInput = document.getElementById('adminPassword');
+    
+    if (passwordToggle && passwordInput) {
+        passwordToggle.addEventListener('click', function() {
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.className = 'ri-eye-off-line';
+            } else {
+                passwordInput.type = 'password';
+                icon.className = 'ri-eye-line';
+            }
+        });
+    }
+    
+    // Form validation enhancement
+    const form = document.querySelector('.admin-login-form');
+    const inputs = form.querySelectorAll('.form-control');
+    
+    inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            if (this.value.trim() !== '') {
+                this.classList.add('has-value');
+            } else {
+                this.classList.remove('has-value');
+            }
+        });
+        
+        // Check initial values
+        if (input.value.trim() !== '') {
+            input.classList.add('has-value');
+        }
+    });
+    
+    // Enhanced security features
+    const adminForm = document.querySelector('.admin-login-form');
+    const loginButton = adminForm.querySelector('.btn-admin-login');
+    
+    // Add loading state to admin login button
+    adminForm.addEventListener('submit', function() {
+        loginButton.innerHTML = '<i class="ri-loader-4-line rotating"></i> Authenticating...';
+        loginButton.disabled = true;
+    });
+    
+    // Session timeout warning
+    let sessionWarningShown = false;
+    setTimeout(function() {
+        if (!sessionWarningShown) {
+            console.log('Session timeout warning would appear here in production');
+            sessionWarningShown = true;
+        }
+    }, 1800000); // 30 minutes
+});
+</script>
 {% endblock %}
 
 {% block extra_css %}

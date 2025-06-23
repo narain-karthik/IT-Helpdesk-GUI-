@@ -13,43 +13,122 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login-styles.css') }}">
     
     {% block head %}{% endblock %}
 </head>
 <body>
-    <!-- Header -->
+    <!-- Professional Header -->
     <header class="header">
         <div class="header-content">
             <div class="logo-container">
-                <div class="logo-placeholder">
-                    <img src="{{ url_for('static', filename='it_helpdesk_logo.png') }}" alt="IT Helpdesk" style="height: 60px; width: auto;">
+                <div class="logo-wrapper">
+                    <img src="{{ url_for('static', filename='it_helpdesk_logo.png') }}" alt="IT Helpdesk Professional" class="header-logo">
                 </div>
                 <div class="company-text">
-                    <h1>IT Helpdesk (India) Ltd</h1>
-                    <h2>IT HELPDESK</h2>
+                    <h1><i class="ri-computer-line"></i> IT Helpdesk Professional</h1>
+                    <h2><i class="ri-global-line"></i> Enterprise Support Solutions</h2>
                 </div>
             </div>
+            
+            <!-- User Info Display -->
+            {% if session.user_id %}
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="ri-user-3-fill"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name">{{ session.username }}</span>
+                        <span class="user-role">
+                            {% if session.role == 'super_admin' %}
+                                <i class="ri-shield-star-line"></i> Super Admin
+                            {% elif session.is_admin %}
+                                <i class="ri-shield-user-line"></i> Administrator
+                            {% else %}
+                                <i class="ri-user-line"></i> Employee
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            {% endif %}
+            
             <nav class="menu">
                 {% if session.user_id %}
                     {% if session.role == 'super_admin' %}
-                        <a href="{{ url_for('super_admin_dashboard') }}"><i class="ri-dashboard-line"></i> Dashboard</a>
-                        <a href="{{ url_for('manage_users') }}"><i class="ri-team-line"></i> Users</a>
-                        <a href="{{ url_for('logout') }}"><i class="ri-logout-box-line"></i> Logout</a>
+                        <a href="{{ url_for('super_admin_dashboard') }}" class="nav-item">
+                            <i class="ri-dashboard-3-line"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="{{ url_for('manage_users') }}" class="nav-item">
+                            <i class="ri-team-line"></i>
+                            <span>Users</span>
+                        </a>
+                        <div class="nav-divider"></div>
+                        <a href="{{ url_for('logout') }}" class="nav-item logout-btn">
+                            <i class="ri-logout-box-line"></i>
+                            <span>Logout</span>
+                        </a>
                     {% elif session.is_admin %}
-                        <a href="{{ url_for('admin_dashboard') }}"><i class="ri-dashboard-line"></i> Dashboard</a>
-                        <a href="{{ url_for('logout') }}"><i class="ri-logout-box-line"></i> Logout</a>
+                        <a href="{{ url_for('admin_dashboard') }}" class="nav-item">
+                            <i class="ri-dashboard-3-line"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <div class="nav-divider"></div>
+                        <a href="{{ url_for('logout') }}" class="nav-item logout-btn">
+                            <i class="ri-logout-box-line"></i>
+                            <span>Logout</span>
+                        </a>
                     {% else %}
-                        <a href="{{ url_for('user_dashboard') }}"><i class="ri-dashboard-line"></i> My Tickets</a>
-                        <a href="{{ url_for('create_ticket') }}"><i class="ri-add-line"></i> New Ticket</a>
-                        <a href="{{ url_for('user_profile') }}"><i class="ri-user-settings-line"></i> Profile</a>
-                        <a href="{{ url_for('logout') }}"><i class="ri-logout-box-line"></i> Logout</a>
+                        <a href="{{ url_for('user_dashboard') }}" class="nav-item">
+                            <i class="ri-ticket-2-line"></i>
+                            <span>My Tickets</span>
+                        </a>
+                        <a href="{{ url_for('create_ticket') }}" class="nav-item create-btn">
+                            <i class="ri-add-circle-line"></i>
+                            <span>New Ticket</span>
+                        </a>
+                        <a href="{{ url_for('user_profile') }}" class="nav-item">
+                            <i class="ri-user-settings-line"></i>
+                            <span>Profile</span>
+                        </a>
+                        <div class="nav-divider"></div>
+                        <a href="{{ url_for('logout') }}" class="nav-item logout-btn">
+                            <i class="ri-logout-box-line"></i>
+                            <span>Logout</span>
+                        </a>
                     {% endif %}
                 {% else %}
-                    <a href="{{ url_for('user_login') }}"><i class="ri-user-line"></i> User Login</a>
-                    <a href="{{ url_for('admin_login') }}"><i class="ri-shield-user-line"></i> Admin Login</a>
+                    <a href="{{ url_for('user_login') }}" class="nav-item login-btn">
+                        <i class="ri-user-line"></i>
+                        <span>Employee Login</span>
+                    </a>
+                    <a href="{{ url_for('admin_login') }}" class="nav-item admin-login-btn">
+                        <i class="ri-shield-keyhole-line"></i>
+                        <span>Admin Login</span>
+                    </a>
                 {% endif %}
             </nav>
         </div>
+        
+        <!-- Breadcrumb Navigation -->
+        {% if session.user_id %}
+            <div class="breadcrumb-container">
+                <div class="breadcrumb-content">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{{ url_for('index') }}"><i class="ri-home-4-line"></i> Home</a>
+                            </li>
+                            {% block breadcrumb %}{% endblock %}
+                        </ol>
+                    </nav>
+                    <div class="system-status">
+                        <span class="status-indicator online"></span>
+                        <small>System Online</small>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     </header>
 
     <!-- Flash Messages -->
@@ -71,9 +150,109 @@
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Footer -->
+    <!-- Professional Footer -->
     <footer class="footer">
-        <p>&copy; 2025 IT Helpdesk (India) Ltd - IT TEAM.</p>
+        <div class="footer-content">
+            <div class="footer-section company-info">
+                <div class="footer-logo">
+                    <img src="{{ url_for('static', filename='it_helpdesk_logo.png') }}" alt="IT Helpdesk" class="footer-logo-img">
+                    <div class="footer-company-text">
+                        <h4>IT Helpdesk Professional</h4>
+                        <p>Enterprise Support Solutions</p>
+                    </div>
+                </div>
+                <p class="company-description">
+                    Providing comprehensive IT support and technical solutions for modern enterprises. 
+                    Our professional helpdesk system ensures efficient ticket management and resolution.
+                </p>
+            </div>
+            
+            <div class="footer-section quick-links">
+                <h5><i class="ri-links-line"></i> Quick Links</h5>
+                <ul>
+                    {% if session.user_id %}
+                        {% if session.role == 'super_admin' %}
+                            <li><a href="{{ url_for('super_admin_dashboard') }}"><i class="ri-dashboard-line"></i> Dashboard</a></li>
+                            <li><a href="{{ url_for('manage_users') }}"><i class="ri-team-line"></i> User Management</a></li>
+                        {% elif session.is_admin %}
+                            <li><a href="{{ url_for('admin_dashboard') }}"><i class="ri-dashboard-line"></i> Admin Dashboard</a></li>
+                        {% else %}
+                            <li><a href="{{ url_for('user_dashboard') }}"><i class="ri-ticket-line"></i> My Tickets</a></li>
+                            <li><a href="{{ url_for('create_ticket') }}"><i class="ri-add-line"></i> Create Ticket</a></li>
+                            <li><a href="{{ url_for('user_profile') }}"><i class="ri-user-line"></i> My Profile</a></li>
+                        {% endif %}
+                    {% else %}
+                        <li><a href="{{ url_for('user_login') }}"><i class="ri-login-box-line"></i> Employee Login</a></li>
+                        <li><a href="{{ url_for('admin_login') }}"><i class="ri-shield-user-line"></i> Admin Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            
+            <div class="footer-section support-info">
+                <h5><i class="ri-customer-service-2-line"></i> Support Information</h5>
+                <div class="support-details">
+                    <div class="support-item">
+                        <i class="ri-time-line"></i>
+                        <div>
+                            <strong>Support Hours</strong>
+                            <p>24/7 Online Support</p>
+                        </div>
+                    </div>
+                    <div class="support-item">
+                        <i class="ri-mail-line"></i>
+                        <div>
+                            <strong>Email Support</strong>
+                            <p>support@ithelpdesk.com</p>
+                        </div>
+                    </div>
+                    <div class="support-item">
+                        <i class="ri-phone-line"></i>
+                        <div>
+                            <strong>Emergency Contact</strong>
+                            <p>+91-XXXX-XXXXXX</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-section system-info">
+                <h5><i class="ri-information-line"></i> System Status</h5>
+                <div class="status-indicators">
+                    <div class="status-item">
+                        <span class="status-dot online"></span>
+                        <span>Database: Online</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-dot online"></span>
+                        <span>Web Server: Active</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-dot online"></span>
+                        <span>All Systems: Operational</span>
+                    </div>
+                </div>
+                <div class="system-stats">
+                    <small>
+                        <i class="ri-calendar-line"></i> Last Updated: {{ moment().format('YYYY-MM-DD HH:mm') if moment else 'Real-time' }}<br>
+                        <i class="ri-code-line"></i> Version: 2.0.0 Professional
+                    </small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <div class="copyright">
+                    <p>&copy; 2025 IT Helpdesk Professional - Enterprise Support Solutions. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#security">Security</a>
+                    <a href="#contact">Contact Us</a>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <!-- Bootstrap JS -->

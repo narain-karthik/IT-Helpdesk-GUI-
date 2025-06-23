@@ -1,60 +1,335 @@
+
 {% extends "base.html" %}
+
+{% block title %}IT Helpdesk Professional - Enterprise Support Solutions{% endblock %}
+
+{% block description %}Professional IT helpdesk system providing comprehensive support solutions for modern enterprises. Efficient ticket management, real-time tracking, and expert technical support.{% endblock %}
 
 {% block content %}
     <!-- Hero Section -->
     <div class="hero-section">
-        <div class="hero-overlay">
-            <div class="hero-content">
-                <img src="{{ url_for('static', filename='it_helpdesk_logo.png') }}" alt="IT Helpdesk" class="hero-logo">
-                <h1>IT Helpdesk</h1>
-                <p>Professional IT support solutions for all your technology needs</p>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="display-4 fw-bold mb-4">
+                            <i class="ri-computer-line text-primary"></i>
+                            IT Helpdesk Professional
+                        </h1>
+                        <p class="lead mb-4">
+                            Experience enterprise-grade IT support with our comprehensive helpdesk solution. 
+                            Streamlined ticket management, real-time tracking, and expert technical assistance 
+                            to keep your business running smoothly.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="{{ url_for('user_login') }}" class="btn btn-primary btn-lg me-3">
+                                <i class="ri-login-box-line"></i> Get Support Now
+                            </a>
+                            <a href="#features" class="btn btn-outline-primary btn-lg">
+                                <i class="ri-information-line"></i> Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image text-center">
+                        <img src="{{ url_for('static', filename='it_helpdesk_logo.png') }}" 
+                             alt="IT Helpdesk Professional" 
+                             class="img-fluid hero-logo-large">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Login Options -->
-    <div class="login-section py-5">
+    <!-- Features Section -->
+    <section id="features" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 fw-bold mb-3">Why Choose Our IT Helpdesk?</h2>
+                    <p class="lead text-muted">
+                        Professional support solutions designed for modern enterprises
+                    </p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="dashboard-card text-center h-100">
+                        <div class="card-body p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="ri-ticket-2-line text-primary" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Smart Ticket Management</h5>
+                            <p class="text-muted">
+                                Intelligent ticket routing, priority management, and automated workflows 
+                                to ensure efficient issue resolution.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="dashboard-card text-center h-100">
+                        <div class="card-body p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="ri-time-line text-success" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">24/7 Support Coverage</h5>
+                            <p class="text-muted">
+                                Round-the-clock technical support with real-time notifications 
+                                and instant communication channels.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="dashboard-card text-center h-100">
+                        <div class="card-body p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="ri-shield-check-line text-warning" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Enterprise Security</h5>
+                            <p class="text-muted">
+                                Advanced security protocols, role-based access control, 
+                                and comprehensive audit trails for compliance.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="dashboard-card text-center h-100">
+                        <div class="card-body p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="ri-bar-chart-line text-info" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Advanced Analytics</h5>
+                            <p class="text-muted">
+                                Comprehensive reporting and analytics to track performance, 
+                                identify trends, and optimize support operations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="dashboard-card text-center h-100">
+                        <div class="card-body p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="ri-team-line text-danger" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Team Collaboration</h5>
+                            <p class="text-muted">
+                                Seamless collaboration tools for IT teams with assignment management 
+                                and knowledge sharing capabilities.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="dashboard-card text-center h-100">
+                        <div class="card-body p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="ri-smartphone-line text-secondary" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Mobile Responsive</h5>
+                            <p class="text-muted">
+                                Access your helpdesk from any device with our fully responsive 
+                                design optimized for mobile and desktop.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section class="py-5">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="text-center mb-4">
-                        <h3>Access Your Account</h3>
-                        <p class="text-muted">Choose your login type to access the IT helpdesk system</p>
-                    </div>
-                   <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <a href="{{ url_for('user_login') }}" class="btn btn-outline-primary btn-lg w-100 login-btn">
-                                <i class="ri-user-line me-2"></i>
-                                Employee Login
-                            </a>
+                <div class="col-lg-8">
+                    <div class="dashboard-card">
+                        <div class="card-header text-center">
+                            <h3 class="mb-0">
+                                <i class="ri-login-circle-line text-primary"></i>
+                                Access Your Account
+                            </h3>
+                            <p class="text-muted mt-2 mb-0">Choose your login type to access the IT helpdesk system</p>
                         </div>
-                       <div class="col-md-6 mb-3">
-                            <a href="{{ url_for('admin_login') }}" class="btn btn-outline-danger btn-lg w-100 login-btn">
-                                <i class="ri-admin-line me-2"></i>
-                                Admin Login
-                            </a>
+                        <div class="card-body p-5">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="login-option text-center">
+                                        <div class="login-icon mb-3">
+                                            <i class="ri-user-3-line text-primary" style="font-size: 4rem;"></i>
+                                        </div>
+                                        <h5 class="fw-bold mb-3">Employee Portal</h5>
+                                        <p class="text-muted mb-4">
+                                            Submit tickets, track issues, and communicate with IT support
+                                        </p>
+                                        <a href="{{ url_for('user_login') }}" class="btn btn-primary btn-lg w-100">
+                                            <i class="ri-user-line me-2"></i>
+                                            Employee Login
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="login-option text-center">
+                                        <div class="login-icon mb-3">
+                                            <i class="ri-shield-user-line text-danger" style="font-size: 4rem;"></i>
+                                        </div>
+                                        <h5 class="fw-bold mb-3">Administrator Panel</h5>
+                                        <p class="text-muted mb-4">
+                                            Manage tickets, users, and system configurations
+                                        </p>
+                                        <a href="{{ url_for('admin_login') }}" class="btn btn-danger btn-lg w-100">
+                                            <i class="ri-shield-keyhole-line me-2"></i>
+                                            Admin Login
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-
-    <!-- Information Section -->
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="alert alert-info">
-                    <h6><i class="ri-information-line"></i> How to Get Support</h6>
-                    <ul class="mb-0">
-                        <li>Log in with your employee credentials</li>
-                        <li>Create a new support ticket describing your issue</li>
-                        <li>Track the progress of your ticket</li>
-                        <li>Receive notifications when your ticket is updated</li>
-                    </ul>
+    <!-- Process Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 fw-bold mb-3">How It Works</h2>
+                    <p class="lead text-muted">
+                        Simple, efficient process to get the support you need
+                    </p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="process-step text-center">
+                        <div class="step-number mb-3">
+                            <span class="badge bg-primary rounded-circle p-3" style="font-size: 1.2rem;">1</span>
+                        </div>
+                        <div class="step-icon mb-3">
+                            <i class="ri-login-box-line text-primary" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Login</h5>
+                        <p class="text-muted">Access the system with your employee credentials</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="process-step text-center">
+                        <div class="step-number mb-3">
+                            <span class="badge bg-success rounded-circle p-3" style="font-size: 1.2rem;">2</span>
+                        </div>
+                        <div class="step-icon mb-3">
+                            <i class="ri-add-circle-line text-success" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Create Ticket</h5>
+                        <p class="text-muted">Describe your issue with detailed information</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="process-step text-center">
+                        <div class="step-number mb-3">
+                            <span class="badge bg-warning rounded-circle p-3" style="font-size: 1.2rem;">3</span>
+                        </div>
+                        <div class="step-icon mb-3">
+                            <i class="ri-eye-line text-warning" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Track Progress</h5>
+                        <p class="text-muted">Monitor real-time updates and communication</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="process-step text-center">
+                        <div class="step-number mb-3">
+                            <span class="badge bg-info rounded-circle p-3" style="font-size: 1.2rem;">4</span>
+                        </div>
+                        <div class="step-icon mb-3">
+                            <i class="ri-checkbox-circle-line text-info" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Resolution</h5>
+                        <p class="text-muted">Get your issue resolved by our expert team</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Support Information -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="dashboard-card">
+                        <div class="card-header text-center">
+                            <h3 class="mb-0">
+                                <i class="ri-information-line text-info"></i>
+                                Support Guidelines
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="support-info">
+                                        <h5 class="fw-bold mb-3">
+                                            <i class="ri-question-line text-primary"></i>
+                                            How to Get Support
+                                        </h5>
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2">
+                                                <i class="ri-arrow-right-s-line text-primary"></i>
+                                                Log in with your employee credentials
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="ri-arrow-right-s-line text-primary"></i>
+                                                Create a detailed support ticket
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="ri-arrow-right-s-line text-primary"></i>
+                                                Track progress in real-time
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="ri-arrow-right-s-line text-primary"></i>
+                                                Receive notifications on updates
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="support-info">
+                                        <h5 class="fw-bold mb-3">
+                                            <i class="ri-time-line text-success"></i>
+                                            Response Times
+                                        </h5>
+                                        <div class="response-times">
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span><strong>Critical Issues:</strong></span>
+                                                <span class="badge bg-danger">< 1 Hour</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span><strong>High Priority:</strong></span>
+                                                <span class="badge bg-warning">< 4 Hours</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span><strong>Normal Priority:</strong></span>
+                                                <span class="badge bg-info">< 24 Hours</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span><strong>Low Priority:</strong></span>
+                                                <span class="badge bg-secondary">< 72 Hours</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
